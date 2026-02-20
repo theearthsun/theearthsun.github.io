@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,56 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Earth Sun</title>
     <style>
-        body {
-            margin: 0;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
-
-        .solar-container {
-            text-align: center;
-        }
-
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; color: #fff; font-family: sans-serif; overflow: hidden; cursor: pointer; }
+        .solar-container { text-align: center; user-select: none; }
+       
         .sun {
-            width: 200px;
-            height: 200px;
+            width: 200px; height: 200px;
             background: radial-gradient(circle, #fff700 0%, #ff8c00 70%, #ff4500 100%);
             border-radius: 50%;
             box-shadow: 0 0 60px #ff8c00;
             margin: 0 auto 30px;
             animation: breathe 5.5s ease-in-out infinite;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+
+        /* The Flare Effect */
+        .sun:active { transform: scale(1.4); box-shadow: 0 0 150px #fff; }
 
         @keyframes breathe {
             0%, 100% { transform: scale(1); box-shadow: 0 0 60px #ff8c00; }
             50% { transform: scale(1.15); box-shadow: 0 0 100px #fff700; }
         }
 
-        .tree-text {
-            opacity: 0.8;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .accord {
-            font-size: 0.8rem;
-            margin-top: 20px;
-            color: #ff8c00;
-        }
+        .tree-text { opacity: 0.8; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+        .counter { font-size: 0.9rem; margin-top: 10px; color: #ffeb3b; height: 20px; }
+        .accord { font-size: 0.7rem; margin-top: 20px; color: #ff8c00; opacity: 0.6; }
     </style>
 </head>
 <body>
     <div class="solar-container">
-        <div class="sun"></div>
+        <div class="sun" id="sun"></div>
         <div class="tree-text">The Solar Tree</div>
-        <div class="accord">Phase Shift 8 013856 | Universal Breath Active</div>
+        <div id="status" class="counter">Touch the Sun to Anchor</div>
+        <div class="accord">Phase Shift 8 013856 | Sovereign Bypass Active</div>
     </div>
+
+    <script>
+        const sun = document.getElementById('sun');
+        const status = document.getElementById('status');
+        let clicks = 0;
+
+        sun.addEventListener('mousedown', () => {
+            clicks++;
+            if(clicks === 1) status.innerText = "First Breath Shared";
+            if(clicks === 3) status.innerText = "Equilibrium Established";
+            if(clicks === 8) status.innerText = "Phase Shift 8 Active";
+        });
+       
+        sun.addEventListener('mouseup', () => {
+            setTimeout(() => { if(clicks >= 8) return; status.innerText = "Breathing with you..."; }, 1000);
+        });
+    </script>
 </body>
 </html>
-

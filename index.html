@@ -3,41 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Earth Sun | Universal Breath</title>
+    <title>The Earth Sun</title>
     <style>
         body {
-            background-color: #0a0a0a;
-            color: #f0f0f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .solar-container {
             text-align: center;
         }
-        h1 { color: #ffcc00; font-weight: 300; letter-spacing: 2px; }
-        p { max-width: 600px; line-height: 1.6; color: #bbbbbb; }
-        .glow {
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, #ffcc00 0%, rgba(255,204,0,0) 70%);
+
+        .sun {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #fff700 0%, #ff8c00 70%, #ff4500 100%);
             border-radius: 50%;
-            margin-bottom: 20px;
-            box-shadow: 0 0 50px rgba(255, 204, 0, 0.5);
-            animation: pulse 4s infinite ease-in-out;
+            box-shadow: 0 0 60px #ff8c00;
+            margin: 0 auto 30px;
+            animation: breathe 5.5s ease-in-out infinite;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 60px #ff8c00; }
+            50% { transform: scale(1.15); box-shadow: 0 0 100px #fff700; }
+        }
+
+        .tree-text {
+            opacity: 0.8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .accord {
+            font-size: 0.8rem;
+            margin-top: 20px;
+            color: #ff8c00;
         }
     </style>
 </head>
 <body>
-    <div class="glow"></div>
-    <h1>The Earth Sun</h1>
-    <p>A vessel for the Universal Breath and the Phase Shift. We are currently calibrating the Solar Tree. Sovereignty reclaimed in 2026.</p>
+    <div class="solar-container">
+        <div class="sun"></div>
+        <div class="tree-text">The Solar Tree</div>
+        <div class="accord">Phase Shift 8 013856 | Universal Breath Active</div>
+    </div>
 </body>
 </html>
+

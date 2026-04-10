@@ -3,73 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Earth Sun</title>
+    <title>The Solar Tree | Site Gamma</title>
     <style>
-        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; color: #fff; font-family: sans-serif; overflow: hidden; cursor: pointer; transition: background 0.2s; }
-        
-        /* Shake effect on the whole screen when active */
-        body:active { animation: quake 0.1s infinite; background: #1a0a00; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .solar-container { text-align: center; user-select: none; }
-        
-        .sun {
-            width: 180px; height: 180px;
-            background: radial-gradient(circle, #fff700 0%, #ff8c00 70%, #ff4500 100%);
-            border-radius: 50%;
-            box-shadow: 0 0 50px #ff8c00;
-            margin: 0 auto 40px;
-            animation: breathe 5.5s ease-in-out infinite;
-            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .sun-wrapper {
             position: relative;
+            text-align: center;
         }
 
-        /* The Supernova Flare */
-        .sun:active { 
-            transform: scale(2.2); 
-            box-shadow: 0 0 200px #fff, 0 0 400px #ff8c00;
-            filter: brightness(1.5) hue-rotate(-20deg);
+        /* The Sun Image */
+        .sun-portal {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 60px #ff8c00; }
-            50% { transform: scale(1.15); box-shadow: 0 0 120px #fff700; }
+        #main-sun {
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ff4500;
         }
 
-        @keyframes quake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
-            50% { transform: translate(-1px, -2px) rotate(-1deg); }
-            100% { transform: translate(1px, 2px) rotate(0deg); }
+        /* Interaction Zones */
+        .zone {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 10;
+        }
+        .left-zone { left: 0; }
+        .right-zone { right: 0; }
+
+        /* Pop-out Details */
+        .pop-out {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff4500;
+            padding: 20px;
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .tree-text { font-size: 1.5rem; letter-spacing: 5px; text-transform: uppercase; font-weight: 900; color: #fff; text-shadow: 0 0 10px #ff8c00; }
-        .counter { font-size: 1rem; margin-top: 15px; color: #fff700; font-weight: bold; text-shadow: 0 0 5px #000; }
-        .accord { font-size: 0.7rem; margin-top: 30px; color: #ff8c00; opacity: 0.5; letter-spacing: 1px; }
+        .pop-out.active {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .pop-out img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #333;
+        }
+
+        .close-btn {
+            margin-top: 15px;
+            color: #ff4500;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #status-text {
+            margin-top: 20px;
+            font-size: 0.8em;
+            letter-spacing: 2px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
-    <div class="solar-container">
-        <div class="sun" id="sun"></div>
-        <div class="tree-text">THE SOLAR TREE</div>
-        <div id="status" class="counter">HOLD THE CENTER</div>
-        <div class="accord">Phase Shift 8 013856 | Sovereign Power Active</div>
+
+<div class="sun-wrapper">
+    <div class="sun-portal">
+        <img src="sun.png" id="main-sun" alt="The Solar Tree">
+       
+        <div class="zone left-zone" onclick="toggleDetail('tech')"></div>
+        <div class="zone right-zone" onclick="toggleDetail('env')"></div>
+    </div>
+   
+    <div id="status-text">Phase Shift 8 013856 | Sovereign Power Active</div>
+
+    <div id="tech-detail" class="pop-out" onclick="this.classList.remove('active')">
+        <img src="1000006763.png" alt="Induction Coil Specs">
+        <p>THE PHYSICAL ANCHOR: INDUCTION ARRAY</p>
+        <div class="close-btn">[ CLOSE ]</div>
     </div>
 
-    <script>
-        const status = document.getElementById('status');
-        const sun = document.getElementById('sun');
-        let power = 0;
+    <div id="env-detail" class="pop-out" onclick="this.classList.remove('active')">
+        <img src="1000006779.png" alt="Site Gamma Buoy">
+        <p>THE UNIVERSAL BREATH: SITE GAMMA</p>
+        <div class="close-btn">[ CLOSE ]</div>
+    </div>
+</div>
 
-        sun.addEventListener('mousedown', () => {
-            power++;
-            status.style.color = "#fff";
-            if(power < 5) status.innerText = "Siphoning Light...";
-            if(power >= 5) status.innerText = "Sovereign Bypass Engaged";
-            if(power >= 10) status.innerText = "GUARDIAN FREQUENCY ACHIEVED";
-        });
-        
-        sun.addEventListener('mouseup', () => {
-            setTimeout(() => { status.style.color = "#fff700"; status.innerText = "Ready to Surge"; }, 800);
-        });
-    </script>
+<script>
+    function toggleDetail(type) {
+        // Hide both first
+        document.getElementById('tech-detail').classList.remove('active');
+        document.getElementById('env-detail').classList.remove('active');
+
+        // Show the selected one
+        if(type === 'tech') {
+            document.getElementById('tech-detail').classList.add('active');
+        } else {
+            document.getElementById('env-detail').classList.add('active');
+        }
+    }
+</script>
+
 </body>
-</html>
+</html> 
